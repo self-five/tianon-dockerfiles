@@ -32,6 +32,7 @@ RUN set -eux; \
 		siege \
 		socat \
 		ssh-audit \
+		tinyproxy \
 		traceroute \
 		tshark \
 		wget \
@@ -40,5 +41,9 @@ RUN set -eux; \
 # git is large on Debian (~20MiB), so isn't included
 	; \
 	rm -rf /var/lib/apt/lists/*
+
+# https://tinyproxy.github.io/#documentation
+RUN mkdir /etc/tinyproxy && printf 'Port 8080' > /etc/tinyproxy/tinyproxy.conf
+# "tinyproxy -d" for foreground mode
 
 CMD ["bash", "--login", "-i"]
